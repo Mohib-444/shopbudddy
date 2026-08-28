@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ShopBuddy - Your Personal Shopping Companion</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            line-height: 1.6;
+            color: #1a1a1a;
+            background: #fafafa;
+        }
+
+        header {
+            background: white;
+            padding: 1rem 2rem;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 600;
+            color: #0066cc;
+            text-decoration: none;
+        }
+
+        nav {
+            display: flex;
+            gap: 2rem;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #666;
+            font-size: 14px;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: #0066cc;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #0066cc 0%, #0052a3 100%);
+            color: white;
+            padding: 80px 2rem;
+            text-align: center;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        .hero p {
+            font-size: 20px;
+            margin-bottom: 30px;
+            opacity: 0.95;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 14px 32px;
+            background: white;
+            color: #0066cc;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 500;
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+            border: none;
+            font-size: 16px;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+        }
+
+        .section {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 60px 2rem;
+        }
+
+        .section h2 {
+            font-size: 36px;
+            margin-bottom: 40px;
+            text-align: center;
+            color: #1a1a1a;
+        }
+
+        .how-it-works {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .step {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            border-top: 3px solid #0066cc;
+        }
+
+        .step-number {
+            display: inline-block;
+            width: 50px;
+            height: 50px;
+            background: #0066cc;
+            color: white;
+            border-radius: 50%;
+            line-height: 50px;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .step h3 {
+            margin-bottom: 10px;
+            color: #1a1a1a;
+        }
+
+        .step p {
+            color: #666;
+            font-size: 14px;
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .feature {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+
+        .feature-icon {
+            font-size: 32px;
+            margin-bottom: 15px;
+        }
+
+        .feature h3 {
+            margin-bottom: 10px;
+            color: #1a1a1a;
+        }
+
+        .feature p {
+            color: #666;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .pricing-section {
+            background: white;
+            padding: 60px 2rem;
+        }
+
+        .pricing-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .pricing-card {
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 40px 30px;
+            text-align: center;
+            background: white;
+            transition: all 0.3s;
+        }
+
+        .pricing-card:hover {
+            border-color: #0066cc;
+            box-shadow: 0 8px 24px rgba(0,102,204,0.1);
+        }
+
+        .pricing-card.featured {
+            border-color: #0066cc;
+            transform: scale(1.05);
+            box-shadow: 0 8px 24px rgba(0,102,204,0.15);
+        }
+
+        .pricing-card h3 {
+            font-size: 22px;
+            margin-bottom: 10px;
+            color: #1a1a1a;
+        }
+
+        .price {
+            font-size: 36px;
+            font-weight: 600;
+            color: #0066cc;
+            margin: 20px 0;
+        }
+
+        .price-period {
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+
+        .pricing-features {
+            list-style: none;
+            margin: 20px 0;
+            text-align: left;
+        }
+
+        .pricing-features li {
+            padding: 10px 0;
+            border-bottom: 1px solid #f0f0f0;
+            color: #666;
+            font-size: 14px;
+        }
+
+        .testimonials {
+            background: white;
+            padding: 60px 2rem;
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .testimonial {
+            background: #f9f9f9;
+            padding: 30px;
+            border-radius: 8px;
+            border-left: 4px solid #0066cc;
+        }
+
+        .stars {
+            color: #ffc107;
+            margin-bottom: 10px;
+        }
+
+        .testimonial p {
+            color: #666;
+            margin-bottom: 15px;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .testimonial-author {
+            font-weight: 500;
+            color: #1a1a1a;
+            font-size: 14px;
+        }
+
+        .cta-section {
+            background: #0066cc;
+            color: white;
+            padding: 60px 2rem;
+            text-align: center;
+        }
+
+        .cta-section h2 {
+            color: white;
+            margin-bottom: 20px;
+        }
+
+        .cta-section p {
+            font-size: 18px;
+            margin-bottom: 30px;
+            opacity: 0.95;
+        }
+
+        footer {
+            background: #1a1a1a;
+            color: white;
+            padding: 40px 2rem;
+            text-align: center;
+            font-size: 14px;
+        }
+
+        .contact-form {
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+            text-align: left;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 500;
+            color: #1a1a1a;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-family: inherit;
+            font-size: 14px;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                gap: 1rem;
+            }
+
+            nav a {
+                font-size: 12px;
+            }
+
+            .hero h1 {
+                font-size: 36px;
+            }
+
+            .hero p {
+                font-size: 16px;
+            }
+
+            .section h2 {
+                font-size: 28px;
+            }
+
+            .pricing-card.featured {
+                transform: scale(1);
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <a href="#" class="logo">ShopBuddy</a>
+            <nav>
+                <a href="#how-it-works">How it works</a>
+                <a href="#pricing">Pricing</a>
+                <a href="#contact">Contact</a>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Shopping Made Lighter</h1>
+            <p>Let ShopBuddy carry your bags while you enjoy your shopping experience</p>
+            <button class="cta-button" onclick="document.getElementById('contact').scrollIntoView({behavior: 'smooth'})">Book Now</button>
+        </div>
+    </section>
+
+    <section id="how-it-works" class="section">
+        <h2>How it works</h2>
+        <div class="how-it-works">
+            <div class="step">
+                <div class="step-number">1</div>
+                <h3>Request</h3>
+                <p>Book a ShopBuddy for your desired time and location through our app or website</p>
+            </div>
+            <div class="step">
+                <div class="step-number">2</div>
+                <h3>Meet</h3>
+                <p>Our friendly buddy arrives at your location and is ready to assist you</p>
+            </div>
+            <div class="step">
+                <div class="step-number">3</div>
+                <h3>Shop</h3>
+                <p>Enjoy your shopping while your buddy carries your bags and keeps them safe</p>
+            </div>
+            <div class="step">
+                <div class="step-number">4</div>
+                <h3>Pay</h3>
+                <p>Pay by the hour - only for the time you use our service</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>Why choose ShopBuddy?</h2>
+        <div class="features">
+            <div class="feature">
+                <div class="feature-icon">👥</div>
+                <h3>Trained & Friendly</h3>
+                <p>All our buddies are carefully selected and trained to provide excellent service</p>
+            </div>
+            <div class="feature">
+                <div class="feature-icon">💰</div>
+                <h3>Affordable & Flexible</h3>
+                <p>Pay only for the hours you need - no hidden charges or commitments</p>
+            </div>
+            <div class="feature">
+                <div class="feature-icon">🛡️</div>
+                <h3>Safe & Secure</h3>
+                <p>Your belongings are safe with us. All buddies are insured and background checked</p>
+            </div>
+            <div class="feature">
+                <div class="feature-icon">📱</div>
+                <h3>Easy Booking</h3>
+                <p>Book instantly through our mobile app or website - just a few clicks</p>
+            </div>
+            <div class="feature">
+                <div class="feature-icon">⏰</div>
+                <h3>Always Available</h3>
+                <p>Available during mall and shopping center hours for your convenience</p>
+            </div>
+            <div class="feature">
+                <div class="feature-icon">⭐</div>
+                <h3>Top Rated</h3>
+                <p>Rated 4.9/5 by thousands of happy customers across the city</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="pricing" class="pricing-section">
+        <h2>Simple, Transparent Pricing</h2>
+        <div class="pricing-cards">
+            <div class="pricing-card">
+                <h3>1 Hour</h3>
+                <div class="price">₹299</div>
+                <div class="price-period">per hour</div>
+                <ul class="pricing-features">
+                    <li>✓ One ShopBuddy</li>
+                    <li>✓ 1 hour of service</li>
+                    <li>✓ Bag carrying & assistance</li>
+                    <li>✓ Basic insurance included</li>
+                </ul>
+                <button class="cta-button">Book Now</button>
+            </div>
+            <div class="pricing-card featured">
+                <h3>Half Day (4 Hours)</h3>
+                <div class="price">₹999</div>
+                <div class="price-period">per 4 hours</div>
+                <ul class="pricing-features">
+                    <li>✓ One ShopBuddy</li>
+                    <li>✓ 4 hours of service</li>
+                    <li>✓ Bag carrying & assistance</li>
+                    <li>✓ Full insurance included</li>
+                    <li>✓ 15% savings</li>
+                </ul>
+                <button class="cta-button">Book Now</button>
+            </div>
+            <div class="pricing-card">
+                <h3>Full Day (8 Hours)</h3>
+                <div class="price">₹1,799</div>
+                <div class="price-period">per 8 hours</div>
+                <ul class="pricing-features">
+                    <li>✓ One ShopBuddy</li>
+                    <li>✓ 8 hours of service</li>
+                    <li>✓ Bag carrying & assistance</li>
+                    <li>✓ Full insurance included</li>
+                    <li>✓ 30% savings</li>
+                </ul>
+                <button class="cta-button">Book Now</button>
+            </div>
+        </div>
+    </section>
+
+    <section class="testimonials">
+        <h2>What our customers say</h2>
+        <div class="testimonials-grid">
+            <div class="testimonial">
+                <div class="stars">⭐⭐⭐⭐⭐</div>
+                <p>"ShopBuddy made my mall day so much better! I didn't have to worry about carrying heavy bags and could actually enjoy my shopping experience. Highly recommended!"</p>
+                <div class="testimonial-author">- Priya M.</div>
+            </div>
+            <div class="testimonial">
+                <div class="stars">⭐⭐⭐⭐⭐</div>
+                <p>"Great service! My buddy was friendly, helpful, and very professional. The pricing is transparent and fair. Will definitely use ShopBuddy again."</p>
+                <div class="testimonial-author">- Rajesh K.</div>
+            </div>
+            <div class="testimonial">
+                <div class="stars">⭐⭐⭐⭐⭐</div>
+                <p>"Best shopping experience ever! Having a buddy carry my bags meant I could visit more stores without getting tired. Worth every rupee!"</p>
+                <div class="testimonial-author">- Anjali P.</div>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta-section">
+        <h2>Ready to shop smarter?</h2>
+        <p>Book your ShopBuddy today and experience shopping like never before</p>
+        <button class="cta-button" onclick="document.getElementById('contact').scrollIntoView({behavior: 'smooth'})">Get Started</button>
+    </section>
+
+    <section id="contact" class="section">
+        <h2>Book Your ShopBuddy</h2>
+        <form class="contact-form" onsubmit="handleSubmit(event)">
+            <div class="form-group">
+                <label for="name">Full Name</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+            <div class="form-group">
+                <label for="phone">Phone Number</label>
+                <input type="tel" id="phone" name="phone" required>
+            </div>
+            <div class="form-group">
+                <label for="date">Preferred Date</label>
+                <input type="date" id="date" name="date" required>
+            </div>
+            <div class="form-group">
+                <label for="hours">Duration (hours)</label>
+                <input type="number" id="hours" name="hours" min="1" max="8" required>
+            </div>
+            <div class="form-group">
+                <label for="location">Shopping Location</label>
+                <input type="text" id="location" name="location" placeholder="e.g., City Center Mall" required>
+            </div>
+            <div class="form-group">
+                <label for="message">Special Requests (optional)</label>
+                <textarea id="message" name="message"></textarea>
+            </div>
+            <button type="submit" class="cta-button" style="width: 100%; background: #0066cc; color: white;">Confirm Booking</button>
+        </form>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 ShopBuddy. All rights reserved. | Making shopping easier, one bag at a time.</p>
+    </footer>
+
+    <script>
+        function handleSubmit(event) {
+            event.preventDefault();
+            alert('Thank you for booking! We will contact you shortly to confirm your ShopBuddy booking.');
+            event.target.reset();
+        }
+    </script>
+</body>
+</html>
